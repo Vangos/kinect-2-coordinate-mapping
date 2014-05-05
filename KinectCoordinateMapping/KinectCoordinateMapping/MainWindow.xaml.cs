@@ -45,7 +45,7 @@ namespace KinectCoordinateMapping
             }
         }
 
-        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
             if (_reader != null)
             {
@@ -142,7 +142,7 @@ namespace KinectCoordinateMapping
                                         point.X = float.IsInfinity(colorPoint.X) ? 0 : colorPoint.X;
                                         point.Y = float.IsInfinity(colorPoint.Y) ? 0 : colorPoint.Y;
                                     }
-                                    else if (_mode == CameraMode.Depth || _mode == CameraMode.Infrared)
+                                    else if (_mode == CameraMode.Depth || _mode == CameraMode.Infrared) // Change the Image and Canvas dimensions to 512x424
                                     {
                                         DepthSpacePoint depthPoint = _sensor.CoordinateMapper.MapCameraPointToDepthSpace(jointPosition);
 
@@ -153,9 +153,9 @@ namespace KinectCoordinateMapping
                                     // Draw
                                     Ellipse ellipse = new Ellipse
                                     {
-                                        Fill = Brushes.LightBlue,
-                                        Width = 20,
-                                        Height = 20
+                                        Fill = Brushes.Red,
+                                        Width = 30,
+                                        Height = 30
                                     };
 
                                     Canvas.SetLeft(ellipse, point.X - ellipse.Width / 2);
